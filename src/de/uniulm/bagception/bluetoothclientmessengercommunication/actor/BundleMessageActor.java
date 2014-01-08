@@ -3,6 +3,7 @@ package de.uniulm.bagception.bluetoothclientmessengercommunication.actor;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.support.v4.content.LocalBroadcastManager;
 import de.philipphock.android.lib.BroadcastActor;
 import de.philipphock.android.lib.logging.LOG;
 import de.uniulm.bagception.broadcastconstants.BagceptionBroadcastContants;
@@ -24,7 +25,10 @@ public class BundleMessageActor extends BroadcastActor<BundleMessageReactor>{
 		filter.addAction(BagceptionBroadcastContants.BROADCAST_BUNDLEMESSAGE_STATUS_INTENT);
 		filter.addAction(BagceptionBroadcastContants.BROADCAST_BUNDLEMESSAGE_RESPONSE_ANSWER_INTENT);
 		
-		a.registerReceiver(this,filter);
+		LocalBroadcastManager.getInstance(a).registerReceiver(this,
+			      filter);
+		
+		
 		
 	}
 
@@ -48,7 +52,11 @@ public class BundleMessageActor extends BroadcastActor<BundleMessageReactor>{
 	}
 
 	
-
+	
+	@Override
+	public void unregister(Context a){
+		LocalBroadcastManager.getInstance(a).unregisterReceiver(this);
+	}
 
 
 

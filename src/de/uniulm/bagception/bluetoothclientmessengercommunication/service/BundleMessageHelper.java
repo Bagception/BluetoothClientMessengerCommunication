@@ -3,6 +3,7 @@ package de.uniulm.bagception.bluetoothclientmessengercommunication.service;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.content.LocalBroadcastManager;
 import de.uniulm.bagception.bluetoothclientmessengercommunication.BundleMessengerInterface;
 import de.uniulm.bagception.broadcastconstants.BagceptionBroadcastContants;
 
@@ -53,7 +54,7 @@ public class BundleMessageHelper implements BundleMessengerInterface{
 	private void sendBundleBroadcast(String action,Bundle b){
 		Intent toSend = new Intent(action);
 		toSend.putExtras(b);
-		context.sendBroadcast(toSend);
+		LocalBroadcastManager.getInstance(context).sendBroadcast(toSend);
 	
 	}
 }
